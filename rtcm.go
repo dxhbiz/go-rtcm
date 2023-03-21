@@ -1,8 +1,10 @@
 package rtcm
 
-//#cgo CFLAGS: -DENAGLO -DENAGAL -DENAQZS -DENACMP -DENAIRN
-//
-//#include "rtcm.h"
+/*
+#cgo CFLAGS: -I./ -DENAGLO -DENAGAL -DENAQZS -DENACMP -DENAIRN
+
+#include "rtcm.h"
+*/
 import "C"
 import (
 	"errors"

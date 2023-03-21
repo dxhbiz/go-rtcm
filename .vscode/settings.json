@@ -4,6 +4,7 @@
     "rtcm.h": "c",
     "stdarg.h": "c",
     "time.h": "c",
-    "dirent.h": "c"
+    "dirent.h": "c",
+    "rtkcmn.h": "c"
   }
 }

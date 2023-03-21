@@ -2,7 +2,7 @@ package rtcm
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -30,7 +30,7 @@ func TestCdecode(t *testing.T) {
 		msgType := msgType
 
 		file := fmt.Sprintf("%d_frame.bin", msgType)
-		data, err := ioutil.ReadFile("./data/" + file)
+		data, err := os.ReadFile("./data/" + file)
 		if err != nil {
 			t.Error(err)
 		}
@@ -55,7 +55,7 @@ func TestDecode(t *testing.T) {
 		msgType := msgType
 
 		file := fmt.Sprintf("%d_frame.bin", msgType)
-		data, err := ioutil.ReadFile("./data/" + file)
+		data, err := os.ReadFile("./data/" + file)
 		if err != nil {
 			t.Error(err)
 		}
