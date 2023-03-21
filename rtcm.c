@@ -222,10 +222,6 @@ static int obsindex(obs_t *obs, gtime_t time, int sat)
 {
     int i,j;
 
-    if (obs->n == 0) {
-        return -1;
-    }
-
     for (i=0;i<obs->n;i++) {
         if (obs->data[i].sat==sat) return i; /* field already exists */
     }
@@ -315,7 +311,7 @@ static int decode_type1002(rtcm_t *rtcm)
 
     if ((nsat=decode_head1001(rtcm,&sync))<0) return -1;
 
-    for (j=0;j<nsat&&rtcm->obs.n>0&&rtcm->obs.n<MAXOBS&&i+74<=rtcm->len*8;j++) {
+    for (j=0;j<nsat&&rtcm->obs.n<MAXOBS&&i+74<=rtcm->len*8;j++) {
         prn  =getbitu(rtcm->buff,i, 6); i+= 6;
         code =getbitu(rtcm->buff,i, 1); i+= 1;
         pr1  =getbitu(rtcm->buff,i,24); i+=24;
@@ -2685,11 +2681,11 @@ extern int decode_rtcm3(rtcm_t *rtcm)
         case 4073: ret=decode_type4073(rtcm); break;
         case 4076: ret=decode_type4076(rtcm); break;
     }
-    if (ret>=0) {
-        if      (1001<=type&&type<=1299) rtcm->nmsg3[type-1000]++; /*   1-299 */
-        else if (4070<=type&&type<=4099) rtcm->nmsg3[type-3770]++; /* 300-329 */
-        else rtcm->nmsg3[0]++; /* other */
-    }
+    // if (ret>=0) {
+    //     if      (1001<=type&&type<=1299) rtcm->nmsg3[type-1000]++; /*   1-299 */
+    //     else if (4070<=type&&type<=4099) rtcm->nmsg3[type-3770]++; /* 300-329 */
+    //     else rtcm->nmsg3[0]++; /* other */
+    // }
     return ret;
 }
 
@@ -2810,7 +2806,7 @@ extern int init_rtcm(rtcm_t *rtcm)
 
     trace(3,"init_rtcm:\n");
 
-    rtcm->staid=rtcm->stah=rtcm->seqno=rtcm->outtype=0;
+    rtcm->staid=rtcm->outtype=0;
     rtcm->time=rtcm->time_s=time0;
     rtcm->sta.name[0]=rtcm->sta.marker[0]='\0';
     rtcm->sta.antdes[0]=rtcm->sta.antsno[0]='\0';
@@ -2833,9 +2829,9 @@ extern int init_rtcm(rtcm_t *rtcm)
         rtcm->lltime[i][j]=time0;
     }
     rtcm->nbyte=rtcm->nbit=rtcm->len=0;
-    rtcm->word=0;
-    for (i=0;i<100;i++) rtcm->nmsg2[i]=0;
-    for (i=0;i<400;i++) rtcm->nmsg3[i]=0;
+    // rtcm->word=0;
+    // for (i=0;i<100;i++) rtcm->nmsg2[i]=0;
+    // for (i=0;i<400;i++) rtcm->nmsg3[i]=0;
 
     rtcm->obs.data=NULL;
     rtcm->nav.eph =NULL;

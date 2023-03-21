@@ -147,8 +147,13 @@
 #include <stdarg.h>
 #include <ctype.h>
 #include <errno.h>
-#include <sys/time.h>
+#ifndef WIN32
+#include <dirent.h>
 #include <time.h>
+#include <sys/time.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#endif
 #include "rtcm.h"
 
 /* constants -----------------------------------------------------------------*/

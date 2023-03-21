@@ -1,0 +1,9 @@
+{
+  "files.associations": {
+    "*.ipynb": "jupyter",
+    "rtcm.h": "c",
+    "stdarg.h": "c",
+    "time.h": "c",
+    "dirent.h": "c"
+  }
+}
