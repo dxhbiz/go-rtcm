@@ -3,6 +3,7 @@ package rtcm
 /*
 #cgo CFLAGS: -I./ -DENAGLO -DENAGAL -DENAQZS -DENACMP -DENAIRN
 
+#include "rtkcmn.h"
 #include "rtcm.h"
 */
 import "C"
@@ -685,4 +686,19 @@ func Decode(data []byte) (rtcm Rtcm, err error) {
 
 	C.free_rtcm(&crtcm)
 	return
+}
+
+// CheckCrc test whether rtcm3 data crc checksum is normal
+func CheckCrc(data []byte) bool {
+	dataLen := len(data)
+	if dataLen < 6 {
+		return false
+	}
+
+	checkLen := dataLen - 3
+	cdata := (*C.uint8_t)(unsafe.Pointer(&data[0]))
+	checkVal := C.rtk_crc24q(cdata, C.int(checkLen))
+	crcVal := C.getbitu(cdata, C.int(checkLen*8), 24)
+
+	return checkVal == crcVal
 }

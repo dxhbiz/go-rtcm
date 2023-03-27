@@ -74,3 +74,21 @@ func TestDecode(t *testing.T) {
 		}
 	}
 }
+
+func TestCheckCrc(t *testing.T) {
+	for _, msgType := range msgs {
+		msgType := msgType
+
+		file := fmt.Sprintf("%d_frame.bin", msgType)
+		data, err := os.ReadFile("./data/" + file)
+		if err != nil {
+			t.Error(err)
+		}
+
+		crc := CheckCrc(data)
+
+		if crc != true {
+			t.Fatalf("expected to get %T, but got %T", true, crc)
+		}
+	}
+}
