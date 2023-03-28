@@ -52,6 +52,7 @@ EXPORT void trace    (int level, const char *format, ...);
 
 /* coordinates transformation ------------------------------------------------*/
 EXPORT void ecef2pos(const double *r, double *pos);
+extern void ecef2lla(const double *r, double *pos);
 EXPORT void pos2ecef(const double *pos, double *r);
 EXPORT void ecef2enu(const double *pos, const double *r, double *e);
 EXPORT void enu2ecef(const double *pos, const double *e, double *r);

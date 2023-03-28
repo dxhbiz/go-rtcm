@@ -1,5 +1,5 @@
-# <center>go-rtcm</center>
-rtcm decoding tool based on cgo, use [RTKLIB](https://github.com/tomojitakasu/RTKLIB/tree/rtklib_2.4.3/src) source code for core decoding
+<h1 align="center">go-rtcm</h1>
+Rtcm decoding tool based on cgo, use [RTKLIB](https://github.com/tomojitakasu/RTKLIB/tree/rtklib_2.4.3/src) source code for core decoding
 
 ### Usage
 ```go

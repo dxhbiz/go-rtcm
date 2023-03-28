@@ -702,3 +702,12 @@ func CheckCrc(data []byte) bool {
 
 	return checkVal == crcVal
 }
+
+// EcefToLla transform ecef to geodetic postion
+func EcefToLla(ecef [3]float64) [3]float64 {
+	var llh [3]float64
+	cEcef := (*C.double)(unsafe.Pointer(&ecef[0]))
+	cPos := (*C.double)(unsafe.Pointer(&llh[0]))
+	C.ecef2lla(cEcef, cPos)
+	return llh
+}

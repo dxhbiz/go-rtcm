@@ -1629,6 +1629,20 @@ extern void ecef2pos(const double *r, double *pos)
     pos[1]=r2>1E-12?atan2(r[1],r[0]):0.0;
     pos[2]=sqrt(r2+z*z)-v;
 }
+/* transform ecef to geodetic postion ------------------------------------------
+* transform ecef position to geodetic position
+* args   : double *r        I   ecef position {x,y,z} (m)
+*          double *pos      O   geodetic position {lat,lon,h} (deg,m)
+* return : none
+* notes  : WGS84, ellipsoidal height
+*-----------------------------------------------------------------------------*/
+extern void ecef2lla(const double *r, double *pos)
+{
+    ecef2pos(r, pos);
+
+    pos[0] = pos[0] * R2D;
+    pos[1] = pos[1] * R2D;
+}
 /* transform geodetic to ecef position -----------------------------------------
 * transform geodetic position to ecef position
 * args   : double *pos      I   geodetic position {lat,lon,h} (rad,m)

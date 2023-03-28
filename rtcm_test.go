@@ -92,3 +92,22 @@ func TestCheckCrc(t *testing.T) {
 		}
 	}
 }
+
+func TestEcefToLla(t *testing.T) {
+	ecef := [3]float64{-4472357.536800, 2670485.179400, -3669374.426300}
+	lla := EcefToLla(ecef)
+
+	expected := [3]float64{-35.343483611276, 149.1581921915763, 618.0140473050997}
+
+	if lla[0] != expected[0] {
+		t.Fatalf("expected latitude to %f, but got %f", expected[0], lla[0])
+	}
+
+	if lla[1] != expected[1] {
+		t.Fatalf("expected longitude to %f, but got %f", expected[1], lla[1])
+	}
+
+	if lla[2] != expected[2] {
+		t.Fatalf("expected altitude to %f, but got %f", expected[2], lla[2])
+	}
+}
